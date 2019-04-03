@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: greeting-word-service
+server:
+  port: 8002
+
+greeting-word:
+  default-greeting-word: Hello
+  greeting-words:
+    en: Hello
+    de: Hallo
+    es: Hola
+    cn: 你好
