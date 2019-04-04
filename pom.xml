@@ -10,8 +10,9 @@
   <modules>
     <module>greeting-word-service</module>
     <module>greeting-service</module>
-      <module>config-server</module>
+    <module>config-server</module>
     <module>eureka-server</module>
+    <module>gateway</module>
   </modules>
 
   <parent>
