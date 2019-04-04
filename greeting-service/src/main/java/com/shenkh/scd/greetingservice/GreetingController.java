@@ -33,7 +33,7 @@ public class GreetingController {
         this.greetingWordService = greetingWordService;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public String greeting(HttpServletRequest request) {
         String language = RequestContextUtils.getLocaleResolver(request).resolveLocale(request).getLanguage();
         l.info("Language: " + language);
