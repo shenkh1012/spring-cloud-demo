@@ -35,10 +35,10 @@ public class GreetingController {
 
     @GetMapping
     public String greeting(HttpServletRequest request) {
-        String locale = RequestContextUtils.getLocaleResolver(request).resolveLocale(request).toLanguageTag();
-        l.info("Locale: " + locale);
+        String language = RequestContextUtils.getLocaleResolver(request).resolveLocale(request).getLanguage();
+        l.info("Language: " + language);
 
-        String greeting =  this.greetingWordService.getGreetingWord(locale) + " Kyle";
+        String greeting =  this.greetingWordService.getGreetingWord(language) + " Kyle";
         l.info("Greeting: " + greeting);
 
         return greeting;
