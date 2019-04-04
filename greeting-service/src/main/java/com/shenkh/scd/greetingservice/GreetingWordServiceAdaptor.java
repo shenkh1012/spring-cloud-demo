@@ -45,12 +45,8 @@ public class GreetingWordServiceAdaptor {
         return this.restTemplate.getForObject(uri, String.class);
     }
 
-    @SuppressWarnings("unchecked")
     private String serviceUri() {
-        List<InstanceInfo> list = discoveryClient.getApplication(GREETING_WORD_SERVICE_NAME).getInstances();
-        if (list != null && list.size() > 0 ) {
-            return list.get(0).getHomePageUrl();
-        }
-        return null;
+        InstanceInfo instance = discoveryClient.getNextServerFromEureka(GREETING_WORD_SERVICE_NAME, false);
+        return instance.getHomePageUrl();
     }
 }
