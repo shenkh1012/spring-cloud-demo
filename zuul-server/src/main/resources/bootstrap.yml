@@ -1,0 +1,26 @@
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 80
+spring:
+  application:
+    name: zuul-server
+zuul:
+  routes:
+    greeting:
+      path: /greeting/**
+      serviceId: greeting-service
+  ignored-services: '*'
+  prefix: /api
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

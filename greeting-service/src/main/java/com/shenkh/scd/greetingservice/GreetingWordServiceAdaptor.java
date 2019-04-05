@@ -1,5 +1,7 @@
 package com.shenkh.scd.greetingservice;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,13 +19,18 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class GreetingWordServiceAdaptor {
-    private GreetingWordClient greetingWordClient;
+  private GreetingWordClient greetingWordClient;
 
-    public GreetingWordServiceAdaptor(GreetingWordClient greetingWordClient) {
-        this.greetingWordClient = greetingWordClient;
-    }
+  public GreetingWordServiceAdaptor(GreetingWordClient greetingWordClient) {
+    this.greetingWordClient = greetingWordClient;
+  }
 
-    public String getGreetingWord(String languageCode) {
-        return this.greetingWordClient.getGreetingWord(languageCode);
-    }
+  @HystrixCommand(fallbackMethod = "getGreetingWordFallBack")
+  public String getGreetingWord(String languageCode) {
+    return this.greetingWordClient.getGreetingWord(languageCode);
+  }
+
+  private String getGreetingWordFallBack(String languageCode) {
+    return "Fallback: Hello";
+  }
 }
